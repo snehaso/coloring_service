@@ -4,7 +4,14 @@ GEM
     daemons (1.2.3)
     diff-lcs (1.2.5)
     eventmachine (1.0.9.1)
+    httpclient (2.7.1)
     json (1.8.3)
+    multi_json (1.11.2)
+    pusher (0.16.0)
+      httpclient (~> 2.7)
+      multi_json (~> 1.0)
+      pusher-signature (~> 0.1.8)
+    pusher-signature (0.1.8)
     rack (1.6.4)
     rack-protection (1.5.3)
       rack
@@ -38,6 +45,7 @@ PLATFORMS
 
 DEPENDENCIES
   json
+  pusher
   rack-test
   rspec (~> 3.0)
   sinatra
