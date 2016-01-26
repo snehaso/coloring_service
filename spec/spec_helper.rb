@@ -7,5 +7,6 @@ RSpec.configure do |config|
     mocks.verify_partial_doubles = true
   end
 
+  require File.join(File.dirname(__FILE__), '../color')
   require File.join(File.dirname(__FILE__), '../coloring_service')
 end
