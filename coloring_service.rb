@@ -10,15 +10,16 @@ class ColoringService < Sinatra::Base
 
   post '/color' do
     data = JSON.parse(request.body.read)
-    if !data.is_a?(Hash) || data['words'].nil?
-      halt 404
+    pusher_channel = data['pusher_notification_channel']
+    if !data.is_a?(Hash) || data['words'].nil? || pusher_channel.nil?
+      halt 404, 'Bad request'
     end
 
     pusher = Pusher::Client.new(app_id: settings.pusher[:app_id],
                                 key: settings.pusher[:key],
                                 secret: settings.pusher[:secret])
     Color.new(data['color_scheme']).words_to_html(data['words']).each do |word_html|
-      pusher.trigger('notifications', 'new_notification', {message: word_html})
+      pusher.trigger(pusher_channel, 'new_notification', {message: word_html})
     end
     {:success => "ok"}.to_json
   end
